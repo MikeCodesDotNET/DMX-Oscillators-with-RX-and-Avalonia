@@ -1,0 +1,56 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:LFO_Tests.ViewModels"
+        xmlns:local="using:LFO_Tests.Views"
+        xmlns:models="using:LFO_Tests.Models"
+        xmlns:l="clr-namespace:LFO_Tests;assembly=LFO_Tests"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="1000" d:DesignHeight="550"
+        Width="1000" Height="550"
+        x:Class="LFO_Tests.Views.MainWindow"
+        Icon="/Assets/avalonia-logo.ico"
+        Title="LFO_Tests">
+
+    <Design.DataContext>
+        <vm:MainWindowViewModel/>
+    </Design.DataContext>
+
+
+
+
+  <Grid RowDefinitions="Auto, *">
+    
+    <StackPanel Orientation="Horizontal" Spacing="10" Margin="10">
+      <Button Content="Start" Command="{Binding StartOutputCommand}"/>
+      <Button Content="Set Sliders to Default" Command="{Binding DefaultValuesCommand}"/>
+   
+      <Slider Minimum="1" Maximum="10" Value="{Binding RateSliderValue}" Margin="20" MinWidth="250"/>
+    
+    </StackPanel>
+
+
+    <Grid ColumnDefinitions="*, Auto" Grid.Row="1" Margin="20">
+      <l:PlaybackBankPanel Items="{Binding Controllables}" SelectedItem="{Binding SelectedItem}">
+        <l:PlaybackBankPanel.ItemTemplate>
+            <DataTemplate>
+              <Border Background="Red" CornerRadius="4" Padding="4" IsVisible="False">
+              </Border>
+            </DataTemplate>
+            
+            <!--
+              <local:PlaybackFader MinHeight="300" MinWidth="100" DataContext="{Binding }" Background="Red"/>
+            -->
+        </l:PlaybackBankPanel.ItemTemplate>
+      </l:PlaybackBankPanel>
+    
+
+      <Border Grid.Column="1" IsVisible="{Binding OscillatorPropertiesIsVisible}">
+        <local:OscillatorPropertiesView Grid.Column="1" 
+                                      DataContext="{Binding OscillatorPropertiesViewModel}" />
+        </Border>
+      
+    </Grid>
+
+  </Grid>
+</Window>

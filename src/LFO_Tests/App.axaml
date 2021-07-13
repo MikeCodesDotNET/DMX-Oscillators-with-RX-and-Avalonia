@@ -1,0 +1,17 @@
+<Application xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="using:LFO_Tests"
+             x:Class="LFO_Tests.App">
+    <Application.DataTemplates>
+        <local:ViewLocator/>
+    </Application.DataTemplates>
+
+    <Application.Styles>
+        <FluentTheme Mode="Light"/>
+        <StyleInclude  Source="avares://Avalonia.Themes.Fluent/DensityStyles/Compact.xaml"/>
+      
+        <StyleInclude Source="/Styles/PlaybackBankPanel.axaml"/>
+        <StyleInclude Source="/Styles/PlaybackFader.axaml"/>
+      
+    </Application.Styles>
+</Application>

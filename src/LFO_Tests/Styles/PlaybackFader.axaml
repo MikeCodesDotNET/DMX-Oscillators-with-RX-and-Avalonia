@@ -1,0 +1,186 @@
+﻿<Styles xmlns="https://github.com/avaloniaui" 
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+        xmlns:l="clr-namespace:LFO_Tests;assembly=LFO_Tests"
+        xmlns:c="clr-namespace:LFO_Tests.Controls;assembly=LFO_Tests"
+        xmlns:converters="using:LFO_Tests.Converters"
+        xmlns:sys="clr-namespace:System;assembly=netstandard">
+
+
+  <Design.PreviewWith>
+    <Border Padding="0">
+      <l:PlaybackBankPanel MinWidth="500" MinHeight="500">
+        <c:PlaybackFader/>
+        <c:PlaybackFader/>
+        <c:PlaybackFader/>
+      </l:PlaybackBankPanel>
+    </Border>
+  </Design.PreviewWith>
+
+  <Styles.Resources>
+    <converters:ObjectEqualityMultiConverter x:Key="ObjectEqualityMultiConverter"/>
+  </Styles.Resources>
+
+  
+  <Style Selector="c|PlaybackFader">
+    <Setter Property="MinHeight" Value="300"/>
+    <Setter Property="MinWidth" Value="100"/>
+    <Setter Property="Background" Value="Transparent" />
+    <Setter Property="BorderBrush" Value="LightGray" />
+    <Setter Property="Padding" Value="{DynamicResource ListBoxItemPadding}" />
+    <Setter Property="Template">
+      <ControlTemplate>
+
+        <Border Name="PART_Border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="2" CornerRadius="5" Margin="5" Padding="5">
+        <Grid RowDefinitions="Auto, *, Auto">
+          <TextBlock Name="Title"
+                     Text="{Binding Title}"
+                     FontWeight="Medium"
+                     HorizontalAlignment="Center"
+                     VerticalAlignment="Center"
+                     Margin="5,5,5,10"/>
+
+          <Slider Name="Slider"
+                  Grid.Row="1"
+                  Minimum="{Binding Minimum}"
+                  Maximum="{Binding Maximum}"
+                  Value="{Binding Value}"
+                  Orientation="Vertical"
+                  HorizontalAlignment="Center"
+                  Ticks="100"/>
+
+          <TextBox Grid.Row="2"
+                   FontSize="13"
+                   Name="ValueTB"
+                   Margin="5,10,5,0"
+                   IsReadOnly="True"
+                   Height="30"
+                   Text="{Binding ReadOut}"
+                   HorizontalContentAlignment="Center"
+                   VerticalContentAlignment="Center"/>
+
+          <Grid.ContextMenu>
+            <ContextMenu>
+              <MenuItem Header="Readout">
+
+                <MenuItem Header="Original">
+                  <MenuItem.Icon>
+                    <CheckBox BorderThickness="0"
+                              Command="{Binding $parent.DataContext.SetDisplayUnitCommand}" CommandParameter="Original">
+                      <CheckBox.IsChecked>
+                        <MultiBinding Converter="{StaticResource ObjectEqualityMultiConverter}">
+                          <Binding  Path="$parent.DataContext.DisplayUnit"/>
+                          <Binding Path="" Source="Original" />
+                        </MultiBinding>
+                      </CheckBox.IsChecked>
+                    </CheckBox>
+                  </MenuItem.Icon>
+                </MenuItem>
+
+
+                <MenuItem Header="Percentage">
+                  <MenuItem.Icon>
+                    <CheckBox BorderThickness="0"
+                              Command="{Binding $parent.DataContext.SetDisplayUnitCommand}" CommandParameter="Percentage">
+                      <CheckBox.IsChecked>
+                        <MultiBinding Converter="{StaticResource ObjectEqualityMultiConverter}">
+                          <Binding  Path="$parent.DataContext.DisplayUnit"/>
+                          <Binding Path="" Source="Percentage" />
+                        </MultiBinding>
+                      </CheckBox.IsChecked>
+                    </CheckBox>
+                  </MenuItem.Icon>
+                </MenuItem>
+
+
+                <MenuItem Header="Byte">
+                  <MenuItem.Icon>
+                    <CheckBox BorderThickness="0"
+                              Command="{Binding $parent.DataContext.SetDisplayUnitCommand}" CommandParameter="Byte">
+                      <CheckBox.IsChecked>
+                        <MultiBinding Converter="{StaticResource ObjectEqualityMultiConverter}">
+                          <Binding  Path="$parent.DataContext.DisplayUnit"/>
+                          <Binding Path="" Source="Byte" />
+                        </MultiBinding>
+                      </CheckBox.IsChecked>
+                    </CheckBox>
+                  </MenuItem.Icon>
+                </MenuItem>
+
+                <MenuItem Header="Short">
+                  <MenuItem.Icon>
+                    <CheckBox BorderThickness="0"
+                              Command="{Binding $parent.DataContext.SetDisplayUnitCommand}" CommandParameter="Short">
+                      <CheckBox.IsChecked>
+                        <MultiBinding Converter="{StaticResource ObjectEqualityMultiConverter}">
+                          <Binding  Path="$parent.DataContext.DisplayUnit"/>
+                          <Binding Path="" Source="Short" />
+                        </MultiBinding>
+                      </CheckBox.IsChecked>
+                    </CheckBox>
+                  </MenuItem.Icon>
+                </MenuItem>
+
+                <MenuItem Header="Hex8">
+                  <MenuItem.Icon>
+                    <CheckBox BorderThickness="0"
+                              Command="{Binding $parent.DataContext.SetDisplayUnitCommand}" CommandParameter="Hex8">
+                      <CheckBox.IsChecked>
+                        <MultiBinding Mode="OneWay" Converter="{StaticResource ObjectEqualityMultiConverter}">
+                          <Binding  Path="$parent.DataContext.DisplayUnit"/>
+                          <Binding Path="" Source="Hex8" />
+                        </MultiBinding>
+                      </CheckBox.IsChecked>
+                    </CheckBox>
+                  </MenuItem.Icon>
+                </MenuItem>
+
+                <MenuItem Header="Hex16">
+                  <MenuItem.Icon>
+                    <CheckBox BorderThickness="0"
+                              Command="{Binding $parent.DataContext.SetDisplayUnitCommand}" CommandParameter="Hex16">
+                      <CheckBox.IsChecked>
+                        <MultiBinding Converter="{StaticResource ObjectEqualityMultiConverter}">
+                          <Binding  Path="$parent.DataContext.DisplayUnit"/>
+                          <Binding Path="" Source="Hex16" />
+                        </MultiBinding>
+                      </CheckBox.IsChecked>
+                    </CheckBox>
+                  </MenuItem.Icon>
+                </MenuItem>
+
+              </MenuItem>
+
+              <MenuItem Header="Reset Value" Command="{Binding $parent.DataContext.ResetValueCommand}"/>
+
+              <Separator/>
+
+              <MenuItem Header="Add Oscillator" IsVisible="{Binding $parent.DataContext.Oscillator, Converter={x:Static ObjectConverters.IsNull}}" Command="{Binding $parent.DataContext.AddOscillatorCommand}"/>
+              <MenuItem Header="Remove Oscillator" IsVisible="{Binding $parent.DataContext.Oscillator, Converter={x:Static ObjectConverters.IsNotNull}}" Command="{Binding $parent.DataContext.RemoveOscillatorCommand}"/>
+
+
+            </ContextMenu>
+          </Grid.ContextMenu>
+          
+        </Grid>
+      </Border>
+      </ControlTemplate>
+      
+
+    </Setter>
+  </Style>
+
+
+  <!--  Disabled State  -->
+
+  <!--  PointerOver State  -->
+  <Style Selector="c|PlaybackFader:pointerover">
+    <Setter Property="BorderBrush" Value="Gray" />
+  </Style>
+
+  <!--  Selected State  -->
+  <Style Selector="c|PlaybackFader:selected /template/ Border#PART_Border">
+    <Setter Property="BorderBrush" Value="Blue" />
+  </Style>
+  
+  
+</Styles>

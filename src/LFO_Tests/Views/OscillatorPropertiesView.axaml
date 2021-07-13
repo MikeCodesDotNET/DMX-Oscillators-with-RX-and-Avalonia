@@ -1,0 +1,93 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="using:LFO_Tests.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="LFO_Tests.Views.OscillatorPropertiesView">
+
+  <Design.DataContext>
+    <vm:OscillatorPropertiesViewModel/>
+  </Design.DataContext>
+  
+  <Grid RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto, Auto" ColumnDefinitions="Auto, *" Margin="15">
+    
+    <TextBlock Text="Oscillator Properties" Grid.Row="0" Grid.ColumnSpan="2" FontSize="20" FontWeight="Medium" Margin="0, 0, 0, 15"/>
+    
+    
+    <TextBlock Text="Type" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center"/>
+    <ComboBox Grid.Row="1" Grid.Column="1" MinHeight="32" MinWidth="250" HorizontalAlignment="Left" Margin="10" SelectedIndex="{Binding SelectedIndex}">
+      <ComboBoxItem Content="Linear"/>
+      <ComboBoxItem Content="Sqaure"/>
+      <ComboBoxItem Content="Triangle"/>
+      <ComboBoxItem Content="Sawtooth"/>
+      <ComboBoxItem Content="Sine"/>
+      <ComboBoxItem Content="Cosine"/>
+      <ComboBoxItem Content="Sine 2x"/>
+      <ComboBoxItem Content="Rainbow Cyan"/>
+      <ComboBoxItem Content="Rainbow Magenta"/>
+      <ComboBoxItem Content="Rainbow Yellow"/>
+      <ComboBoxItem Content="Sparkle 1"/>
+      <ComboBoxItem Content="Sparkle 2"/>
+      <ComboBoxItem Content="Sparkle 3"/>
+      <ComboBoxItem Content="Triangle Off Zero"/>
+      <ComboBoxItem Content="Sine Off Zero"/>
+      <ComboBoxItem Content="Inverted Cos Off Zero"/>
+      <ComboBoxItem Content="Ramp"/>
+      <ComboBoxItem Content="Random"/>
+    </ComboBox>
+
+
+    <TextBlock Text="Rate" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center"/>
+    <NumericUpDown Grid.Row="2" Grid.Column="1" 
+                   MinHeight="32" MinWidth="75" 
+                   HorizontalAlignment="Left" 
+                   Margin="10" 
+                   VerticalContentAlignment="Center" 
+                   Minimum="0"
+                   Maximum="10"
+                   Increment="0.1"
+                   Value="{Binding Rate}"/>
+
+    <TextBlock Text="Size" Grid.Row="3" Grid.Column="0" VerticalAlignment="Center"/>
+    <NumericUpDown Grid.Row="3" Grid.Column="1"
+                   MinHeight="32" MinWidth="75"
+                   HorizontalAlignment="Left"
+                   Margin="10"
+                   VerticalContentAlignment="Center"
+                   Minimum="0.0"
+                   Maximum="1.0"
+                   Increment="0.1"
+                   Value="{Binding Size}"/>
+
+    <TextBlock Text="Offset" Grid.Row="4" Grid.Column="0" VerticalAlignment="Center"/>
+    <NumericUpDown Grid.Row="4" Grid.Column="1" 
+                   MinHeight="32" MinWidth="75" 
+                   HorizontalAlignment="Left" 
+                   Margin="10" 
+                   VerticalContentAlignment="Center" 
+                   Minimum="0"
+                   Maximum="10"
+                   Increment="0.1"
+                   Value="{Binding Offset}"/>
+
+    <TextBlock Text="Phase" Grid.Row="5" Grid.Column="0" VerticalAlignment="Center"/>
+    <NumericUpDown Grid.Row="5" Grid.Column="1" 
+                   MinHeight="32" MinWidth="75" 
+                   HorizontalAlignment="Left" 
+                   Margin="10" 
+                   VerticalContentAlignment="Center" 
+                   Minimum="0"
+                   Maximum="10"
+                   Increment="0.1"
+                   Value="{Binding Phase}"/>
+
+    <TextBlock Text="Running" Grid.Row="6" Grid.Column="0" VerticalAlignment="Center"/>
+    <CheckBox Grid.Row="6" Grid.Column="1" MinHeight="32" MinWidth="75" HorizontalAlignment="Left" Margin="10" VerticalContentAlignment="Center" IsChecked="{Binding IsRunning}"/>
+
+
+
+
+  </Grid>
+  
+</UserControl>
